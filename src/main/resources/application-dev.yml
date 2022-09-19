@@ -1,0 +1,18 @@
+# profile dev
+app:
+  feign:
+    config:
+      name: transaction-service
+      url: https://blu.mocklab.io
+      path: /api/blu
+
+spring:
+  # database connection
+  datasource:
+    url: jdbc:postgresql://localhost:5432/blu
+    username: postgres
+    password: postgres
+
+  # flyway flag for migration
+  flyway:
+    enabled: true

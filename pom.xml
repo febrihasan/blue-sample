@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>org.ait.project.blu.transaction</groupId>
+	<artifactId>transaction-service</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>Transaction Service</name>
+	<description>AIT - BLU Transaction Services</description>
+	<properties>
+		<feign-jackson.version>11.9.1</feign-jackson.version>
+		<java.version>11</java.version>
+		<lombok.version>1.18.24</lombok.version>
+		<netflix-hystrix.version>2.2.10.RELEASE</netflix-hystrix.version>
+		<org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
+		<org.mapstruct-binding.version>0.2.0</org.mapstruct-binding.version>
+		<org.zalando.version>2.14.0</org.zalando.version>
+		<spring-cloud.version>2021.0.4</spring-cloud.version>
+		<springdoc-openapi.version>1.6.11</springdoc-openapi.version>
+	</properties>
+	<dependencies>
+		<!-- [BEGIN] Spring Actuator -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!-- [END] Spring Actuator -->
+
+		<!-- [BEGIN] Spring WebFlux -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+		<!-- [END] Spring WebFlux -->
+
+		<!-- [BEGIN] Spring Validation -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<!-- [END] Spring Validation -->
+
+		<!-- [BEGIN] Spring Data JPA -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!-- [END] Spring Data JPA -->
+
+		<!-- [BEGIN] Spring Cloud OpenFeign -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<!-- [END] Spring Cloud OpenFeign -->
+
+		<!-- [BEGIN] Feign Jackson -->
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-jackson</artifactId>
+			<version>${feign-jackson.version}</version>
+		</dependency>
+		<!-- [END] Feign Jakson -->
+
+		<!-- [BEGIN] Spring Hystrix -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+			<version>${netflix-hystrix.version}</version>
+		</dependency>
+		<!-- [END] Spring Hystrix -->
+
+		<!-- [BEGIN] Spring Documentation -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-webflux-ui</artifactId>
+			<version>${springdoc-openapi.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-javadoc</artifactId>
+			<version>${springdoc-openapi.version}</version>
+		</dependency>
+		<!-- [END] Spring Documentation -->
+
+		<!-- [BEGIN] Project Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- [END] Project Lombok -->
+
+		<!-- [BEGIN] Mapstruct -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${org.mapstruct.version}</version>
+		</dependency>
+		<!-- [END] Mapstruct -->
+
+		<!-- [BEGIN] Zalando -->
+		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>logbook-spring-boot-starter</artifactId>
+			<version>${org.zalando.version}</version>
+		</dependency>
+		<!-- [END] Zalando -->
+
+		<!-- [BEGIN] Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- [END] Test -->
+
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+						<dependency>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>${org.mapstruct-binding.version}</version>
+						</dependency>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

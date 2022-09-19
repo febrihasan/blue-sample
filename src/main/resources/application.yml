@@ -1,0 +1,55 @@
+#server
+server:
+  port: 5000
+
+# spring
+spring:
+  # application name
+  application:
+    name: Transaction Service
+  # profiles active
+  profiles:
+    active: dev
+  # RESTful path webflux
+  webflux:
+    base-path: /api
+
+# logbook format style to write the log file
+logbook:
+  format:
+    style: splunk
+
+# logging
+logging:
+  #location log file
+  file:
+    path: logs
+    name: logs/transaction-service.log
+  # level write log file
+  level:
+    #set for openfeign write into log
+    org.ait.project.blu.transaction.shared.openfeign: DEBUG
+    #set for logbook write into log
+    org.zalando.logbook: TRACE
+
+# open feign
+feign:
+  #active openfeign fallback set true on circuit breaker and hystrix
+  circuitbreaker:
+    enabled: true
+  # hystrix flag
+  hystrix:
+    enabled: false
+  # client openfeign log set
+  client:
+    config:
+      transaction-service:
+        loggerLevel: full
+
+#turn off time out hystrix, because for default this config if true set timeout to 15 sec, and openfeign timeout unused
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
